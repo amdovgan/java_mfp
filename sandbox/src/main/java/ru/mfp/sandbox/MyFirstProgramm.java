@@ -8,7 +8,12 @@ public class MyFirstProgramm {
     hello("world");
 
     double len = 3;
+    double a = 4;
+    double b = 5;
+
     System.out.println("Площадь квадрата со стороной " + len + " = " + area(len));
+
+    System.out.println("Площадь прямоугольника со сторонами " + a + " $ " + b + " = " + area(a,b));
 
   }
 
@@ -16,8 +21,14 @@ public class MyFirstProgramm {
     System.out.println("Hello, " + nobody + "!");
   }
 
+
   public static double area(double side) {
-    return side*side;
+    return side * side;
+  }
+
+  public static double area(double a, double b) {
+    return a * b;
+
   }
 } 
 
