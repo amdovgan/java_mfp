@@ -9,13 +9,13 @@ public class MyFirstProgramm {
     hello("world");
 
 
-
+*/
     Square si = new Square(3);
     System.out.println("Площадь квадрата со стороной " + si.side + " = " + si.area());
 
     Rectangle re = new Rectangle(4,5);
     System.out.println("Площадь прямоугольника со сторонами " + re.a + " $ " + re.b + " = " + re.area());
-*/
+
 
     Point p1 = new Point(3,4);
     Point p2 = new Point(8,7);
