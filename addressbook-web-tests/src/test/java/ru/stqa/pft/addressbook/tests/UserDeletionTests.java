@@ -6,8 +6,8 @@ public class UserDeletionTests extends TestBase {
 
   @Test
   public void testUserDeletion() {
-    app.selectUser();
-    app.deleteSelectedUsers();
+    app.getContactHelper().selectUser();
+    app.getContactHelper().deleteSelectedUsers();
 
   }
 
