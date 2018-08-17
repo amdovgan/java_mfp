@@ -21,3 +21,5 @@ sandbox/build/scripts/sandbox.bat
 sandbox/build/tmp/jar/MANIFEST.MF
 .idea/workspace.xml
 .idea/misc.xml
+addressbook-web-tests/IEDriverServer.exe
+addressbook-web-tests/chromedriver.exe
