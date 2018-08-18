@@ -12,11 +12,10 @@ public class UserAddTests extends TestBase {
   @Test
   public void testUserAdd() {
     app.getNavigationHelper().gotoHomePage();
-    app.getNavigationHelper().gotoUserForm();
-    app.getContactHelper().fillUserForm(new UserName("namefirst", "namemiddle", "namelast", "ololo"),  new UserPhoneEmail("495999999", "9999999999", "tester@test.ru"), new UserDateBirth("1917", "2017"));
-    app.getContactHelper().fillUserData(new UserData("mycompany", "myaddress", "test.ru", "groupname"), true);
-    app.getContactHelper().submitUserCreation();
-    app.getContactHelper().returnToHomePage();
+    app.getContactHelper().createContact(new UserName("nameFirstCreate", "nameMiddleCreate", "nameLastCreate", "ololoCreate"),
+            new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
+            new UserDateBirth("1917", "2017"),
+            new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupName"));
   }
 
 }
