@@ -1,8 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.UserDateBirth;
 import ru.stqa.pft.addressbook.model.UserName;
@@ -18,17 +20,14 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillUserForm(UserName userName, UserData userData, UserPhoneEmail userPhoneEmail, UserDateBirth userDateBirth) {
+  public void fillUserForm(UserName userName, UserPhoneEmail userPhoneEmail, UserDateBirth userDateBirth) {
     type(By.name("firstname"), userName.getFirstname());
     type(By.name("middlename"), userName.getMiddlename());
     type(By.name("lastname"), userName.getLastname());
     type(By.name("nickname"), userName.getNickname());
-    type(By.name("company"), userData.getCompanyname());
-    type(By.name("address"), userData.getAddress());
     type(By.name("home"), userPhoneEmail.getHomephone());
     type(By.name("mobile"), userPhoneEmail.getMobilephone());
     type(By.name("email"), userPhoneEmail.getEmail());
-    type(By.name("homepage"), userData.getHomepageurl());
     click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
     click(By.xpath("//div[@id='content']/form/select[1]//option[27]"));
     click(By.xpath("//div[@id='content']/form/select[2]//option[11]"));
@@ -36,7 +35,19 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/select[3]//option[3]"));
     click(By.xpath("//div[@id='content']/form/select[4]//option[2]"));
     type(By.name("ayear"), userDateBirth.getYearofholiday());
+
   }
+  public void fillUserData (UserData userData, boolean creation) {
+    type(By.name("company"), userData.getCompanyname());
+    type(By.name("address"), userData.getAddress());
+    type(By.name("homepage"), userData.getHomepageurl());
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+  }
+
 
   public void deleteSelectedUsers() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
@@ -57,6 +68,6 @@ public class ContactHelper extends HelperBase {
   }
 
   public void returnToHomePage() {
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
   }
 }

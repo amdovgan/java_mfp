@@ -4,11 +4,13 @@ public class UserData {
   private final String companyname;
   private final String address;
   private final String homepageurl;
+  private String group;
 
-  public UserData(String companyname, String address, String homepageurl) {
+  public UserData(String companyname, String address, String homepageurl, String group) {
     this.companyname = companyname;
     this.address = address;
     this.homepageurl = homepageurl;
+    this.group = group;
   }
 
   public String getCompanyname() {
@@ -21,5 +23,9 @@ public class UserData {
 
   public String getHomepageurl() {
     return homepageurl;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }
