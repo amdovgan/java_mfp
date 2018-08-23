@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.UserDateBirth;
@@ -11,15 +12,19 @@ public class UserDeletionTests extends TestBase {
   @Test
   public void testUserDeletion() {
     app.getNavigationHelper().gotoHomePage();
+    int before = app.getContactHelper().getContactCount();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new UserName("nameFirstCreate", "nameMiddleCreate", "nameLastCreate", "ololoCreate"),
               new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
               new UserDateBirth("1917", "2017"),
               new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupName"));
     }
-    app.getContactHelper().selectUser();
+    app.getContactHelper().selectUser(before - 1);
     app.getContactHelper().deleteSelectedUsers();
     app.getContactHelper().returnToHomePage();
+    int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after,before - 1);
+
   }
 
 }
