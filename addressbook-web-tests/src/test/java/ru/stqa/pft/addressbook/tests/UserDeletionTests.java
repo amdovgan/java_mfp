@@ -27,6 +27,9 @@ public class UserDeletionTests extends TestBase {
     List<UserName> after = app.getContactHelper().getUserNameList();
     Assert.assertEquals(after.size(),before.size() - 1);
 
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
+
   }
 
 }
