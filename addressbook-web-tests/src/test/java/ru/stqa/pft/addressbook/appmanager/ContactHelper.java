@@ -98,10 +98,8 @@ public class ContactHelper extends HelperBase {
     List<UserName> usernames = new ArrayList<UserName>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
-      String lastname = element.findElement(By.xpath("//td[2]")).getText();
-      String firstname = element.findElement(By.xpath("//td[3]")).getText();
-      //String lastname = element.findElement(By.xpath("//td[4]")).getText();
-      //String nickname = element.findElement(By.xpath("//td[2]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       UserName username = new UserName(id, firstname, null, lastname, null);
       usernames.add(username);

@@ -15,7 +15,7 @@ public class UserDeletionTests extends TestBase {
   public void testUserDeletion() {
     app.getNavigationHelper().gotoHomePage();
     if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new UserName("nameFirstCreate", "nameMiddleCreate", "nameLastCreate", "ololoCreate"),
+      app.getContactHelper().createContact(new UserName("nameFirstCreate", null, "nameLastCreate", null),
               new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
               new UserDateBirth("1917", "2017"),
               new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupName"));

@@ -8,7 +8,6 @@ import ru.stqa.pft.addressbook.model.UserName;
 import ru.stqa.pft.addressbook.model.UserPhoneEmail;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class UserAddTests extends TestBase {
@@ -18,11 +17,11 @@ public class UserAddTests extends TestBase {
   public void testUserAdd() {
     app.getNavigationHelper().gotoHomePage();
     List<UserName> before = app.getContactHelper().getUserNameList();
-    UserName nameofuser = new UserName("nameFirstCreate", "nameMiddleCreate", "nameLastCreate", null);
+    UserName nameofuser = new UserName("nameFirstCreate", null, "nameLastCreate", null);
     app.getContactHelper().createContact(nameofuser,
             new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
             new UserDateBirth("1917", "2017"),
-            new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupName"));
+            new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupCreateName"));
     List<UserName> after = app.getContactHelper().getUserNameList();
     Assert.assertEquals(after.size(),before.size() + 1);
 
