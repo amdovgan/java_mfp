@@ -78,11 +78,26 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void createContact(UserName Name, UserPhoneEmail PhoneEmail, UserDateBirth DateBirth, UserData Data) {
+  public void create(UserName Name, UserPhoneEmail PhoneEmail, UserDateBirth DateBirth, UserData Data) {
     gotoUserForm();
     fillUserForm(Name, PhoneEmail, DateBirth);
     fillUserData(Data, true);
     submitUserCreation();
+    returnToHomePage();
+  }
+
+  public void modify(int index, UserName nameOfUser, UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser) {
+    selectUser(index);
+    initUserModification();
+    fillUserForm(nameOfUser, phoneEmailOfUser,birthDateOfUser);
+    fillUserData(dataOfUser,false);
+    submitUserModification();
+    returnToHomePage();
+  }
+
+  public void delete(int index) {
+    selectUser(index);
+    deleteSelectedUsers();
     returnToHomePage();
   }
 
@@ -94,7 +109,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<UserName> getUserNameList() {
+  public List<UserName> list() {
     List<UserName> usernames = new ArrayList<UserName>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {

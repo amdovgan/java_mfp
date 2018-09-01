@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.UserDateBirth;
@@ -12,33 +13,35 @@ import java.util.List;
 
 public class UserModificationTests extends TestBase {
 
-  @Test
-  public void testUserModification() {
-    app.getNavigationHelper().gotoHomePage();
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new UserName("nameFirstCreate", null, "nameLastCreate", null),
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().homePage();
+    if (app.contact().list().size() == 0) {
+      app.contact().create(new UserName("nameFirstCreate", null, "nameLastCreate", null),
               new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
               new UserDateBirth("1917", "2017"),
               new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", null));
     }
-    List<UserName> before = app.getContactHelper().getUserNameList();
-    //app.getContactHelper().selectUser(before.size() - before.size());
-    app.getContactHelper().initUserModification();
-    UserName nameOfUser = new UserName(before.get(before.size() - before.size()).getId(),"nameFirstMod", null, "nameLastMod", null);
-    app.getContactHelper().fillUserForm(nameOfUser,
-            new UserPhoneEmail("495999998", "9999999998", "tester@test.com"),
-            new UserDateBirth("2917", "3917"));
-    app.getContactHelper().fillUserData(new UserData("mycompany5", "myAddressMod", "test.com", null), false);
-    app.getContactHelper().submitUserModification();
-    app.getContactHelper().returnToHomePage();
-    List<UserName> after = app.getContactHelper().getUserNameList();
+  }
+
+  @Test //(enabled = false)
+  public void testUserModification() {
+    List<UserName> before = app.contact().list();
+    int index = before.size() - before.size();
+    UserName nameOfUser = new UserName(before.get(index).getId(),"nameFirstMod", null, "nameLastMod", null);
+    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail ("495999998", "9999999998", "tester@test.com");
+    UserDateBirth birthDateOfUser = new UserDateBirth ("2917", "3917");
+    UserData dataOfUser = new UserData("mycompany5", "myAddressMod", "test.com", null);
+    app.contact().modify(index, nameOfUser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
+    List<UserName> after = app.contact().list();
     Assert.assertEquals(after.size(),before.size());
 
-    before.remove(before.size() - before.size());
+    before.remove(index);
     before.add(nameOfUser);
     Comparator<? super UserName> byId = (u1, u2) -> Integer.compare(u1.getId(), u2.getId());
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
   }
+
 }

@@ -13,16 +13,16 @@ import java.util.List;
 public class UserAddTests extends TestBase {
 
 
-  @Test
+  @Test //(enabled = false)
   public void testUserAdd() {
-    app.getNavigationHelper().gotoHomePage();
-    List<UserName> before = app.getContactHelper().getUserNameList();
+    app.goTo().homePage();
+    List<UserName> before = app.contact().list();
     UserName nameofuser = new UserName("nameFirstCreate", null, "nameLastCreate", null);
-    app.getContactHelper().createContact(nameofuser,
-            new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
-            new UserDateBirth("1917", "2017"),
-            new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupCreateName"));
-    List<UserName> after = app.getContactHelper().getUserNameList();
+    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail ("495999999", "9999999999", "testerCreate@test.ru");
+    UserDateBirth birthDateOfUser = new UserDateBirth ("1917", "2017");
+    UserData dataOfUser = new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", "groupCreateName");
+    app.contact().create(nameofuser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
+    List<UserName> after = app.contact().list();
     Assert.assertEquals(after.size(),before.size() + 1);
 
     before.add(nameofuser);
