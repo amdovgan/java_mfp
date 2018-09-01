@@ -17,10 +17,10 @@ public class UserModificationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
-      app.contact().create(new UserName("nameFirstCreate", null, "nameLastCreate", null),
-              new UserPhoneEmail("495999999", "9999999999", "testerCreate@test.ru"),
+      app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate"),
+              new UserPhoneEmail().withHomephone("495999999").withMobilephone("9999999999").withEmail("testerCreate@test.ru"),
               new UserDateBirth("1917", "2017"),
-              new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", null));
+              new UserData().withCompanyname("myCompanyCreate").withAddress("myAddressCreate").withHomepageurl("testCreate.ru"));
     }
   }
 
@@ -28,10 +28,10 @@ public class UserModificationTests extends TestBase {
   public void testUserModification() {
     List<UserName> before = app.contact().list();
     int index = before.size() - before.size();
-    UserName nameOfUser = new UserName(before.get(index).getId(),"nameFirstMod", null, "nameLastMod", null);
-    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail ("495999998", "9999999998", "tester@test.com");
+    UserName nameOfUser = new UserName().withId(before.get(index).getId()).withFirstname("nameFirstMod").withLastname("nameLastMod");
+    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("495999998").withMobilephone("9999999998").withEmail("tester@test.com");
     UserDateBirth birthDateOfUser = new UserDateBirth ("2917", "3917");
-    UserData dataOfUser = new UserData("mycompany5", "myAddressMod", "test.com", null);
+    UserData dataOfUser = new UserData().withCompanyname("mycompany5").withAddress("myAddressMod").withHomepageurl("test.com");
     app.contact().modify(index, nameOfUser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
     List<UserName> after = app.contact().list();
     Assert.assertEquals(after.size(),before.size());
