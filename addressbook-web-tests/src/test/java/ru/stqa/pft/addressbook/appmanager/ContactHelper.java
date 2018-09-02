@@ -3,16 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.pft.addressbook.model.UserName;
+import ru.stqa.pft.addressbook.model.Contacts;
+
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.model.UserData;
-import ru.stqa.pft.addressbook.model.UserDateBirth;
-import ru.stqa.pft.addressbook.model.UserName;
-import ru.stqa.pft.addressbook.model.UserPhoneEmail;
+import ru.stqa.pft.addressbook.model.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -115,8 +113,8 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public Set<UserName> all() {
-    Set<UserName> usernames = new HashSet<UserName>();
+  public Contacts all() {
+    Contacts usernames = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();

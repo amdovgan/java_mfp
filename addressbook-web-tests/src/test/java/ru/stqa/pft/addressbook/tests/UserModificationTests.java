@@ -1,14 +1,12 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.UserData;
-import ru.stqa.pft.addressbook.model.UserDateBirth;
-import ru.stqa.pft.addressbook.model.UserName;
-import ru.stqa.pft.addressbook.model.UserPhoneEmail;
+import ru.stqa.pft.addressbook.model.*;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class UserModificationTests extends TestBase {
 
@@ -25,19 +23,16 @@ public class UserModificationTests extends TestBase {
 
   @Test //(enabled = false)
   public void testUserModification() {
-    Set<UserName> before = app.contact().all();
+    Contacts before = app.contact().all();
     UserName modifiedUser = before.iterator().next();
     UserName nameOfUser = new UserName().withId(modifiedUser.getId()).withFirstname("nameFirstMod").withLastname("nameLastMod");
     UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("495999998").withMobilephone("9999999998").withEmail("tester@test.com");
     UserDateBirth birthDateOfUser = new UserDateBirth ("2917", "3917");
     UserData dataOfUser = new UserData().withCompanyname("mycompany5").withAddress("myAddressMod").withHomepageurl("test.com");
     app.contact().modify(nameOfUser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
-    Set<UserName> after = app.contact().all();
-    Assert.assertEquals(after.size(),before.size());
-
-    before.remove(modifiedUser);
-    before.add(nameOfUser);
-    Assert.assertEquals(before, after);
+    Contacts after = app.contact().all();
+    assertEquals(after.size(),before.size());
+    assertThat(after, equalTo(before.without(modifiedUser).withAdded(nameOfUser)));
   }
 
 }
