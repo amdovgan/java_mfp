@@ -22,9 +22,9 @@ public class UserModificationTests extends TestBase {
               new UserData("myCompanyCreate", "myAddressCreate", "testCreate.ru", null));
     }
     List<UserName> before = app.getContactHelper().getUserNameList();
-    //app.getContactHelper().selectUser(before.size() - before.size());
-    app.getContactHelper().initUserModification();
-    UserName nameOfUser = new UserName(before.get(before.size() - before.size()).getId(),"nameFirstMod", null, "nameLastMod", null);
+    app.getContactHelper().selectUser(before.size() - 1);
+    app.getContactHelper().initUserModification(before.size() - 1);
+    UserName nameOfUser = new UserName(before.get(before.size() - 1).getId(),"nameFirstMod", null, "nameLastMod", null);
     app.getContactHelper().fillUserForm(nameOfUser,
             new UserPhoneEmail("495999998", "9999999998", "tester@test.com"),
             new UserDateBirth("2917", "3917"));
@@ -34,7 +34,7 @@ public class UserModificationTests extends TestBase {
     List<UserName> after = app.getContactHelper().getUserNameList();
     Assert.assertEquals(after.size(),before.size());
 
-    before.remove(before.size() - before.size());
+    before.remove(before.size() - 1);
     before.add(nameOfUser);
     Comparator<? super UserName> byId = (u1, u2) -> Integer.compare(u1.getId(), u2.getId());
     before.sort(byId);
