@@ -33,6 +33,7 @@ public class UserModificationTests extends TestBase {
     Contacts after = app.contact().all();
     assertEquals(after.size(),before.size());
     assertThat(after, equalTo(before.without(modifiedUser).withAdded(nameOfUser)));
+    //assertThat(after, equalTo(before.withModified(modifiedUser, nameOfUser)));
   }
 
 }
