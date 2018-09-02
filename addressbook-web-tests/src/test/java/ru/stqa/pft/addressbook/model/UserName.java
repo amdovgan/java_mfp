@@ -3,11 +3,27 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class UserName {
-  private int id = Integer.MAX_VALUE;
-  private String firstname;
-  private String middlename;
-  private String lastname;
-  private String nickname;
+  private int id;
+  private final String firstname;
+  private final String middlename;
+  private final String lastname;
+  private final String nickname;
+
+  public UserName(int id, String firstname, String middlename, String lastname, String nickname) {
+    this.id = id;
+    this.firstname = firstname;
+    this.middlename = middlename;
+    this.lastname = lastname;
+    this.nickname = nickname;
+  }
+
+  public UserName(String firstname, String middlename, String lastname, String nickname) {
+    this.id = Integer.MAX_VALUE;
+    this.firstname = firstname;
+    this.middlename = middlename;
+    this.lastname = lastname;
+    this.nickname = nickname;
+  }
 
   public String getFirstname() {
     return firstname;
@@ -29,31 +45,9 @@ public class UserName {
     return id;
   }
 
-  public UserName withId(int id) {
+  public void setId(int id) {
     this.id = id;
-    return this;
   }
-
-  public UserName withFirstname(String firstname) {
-    this.firstname = firstname;
-    return this;
-  }
-
-  public UserName withMiddlename(String middlename) {
-    this.middlename = middlename;
-    return this;
-  }
-
-  public UserName withLastname(String lastname) {
-    this.lastname = lastname;
-    return this;
-  }
-
-  public UserName withNickname(String nickname) {
-    this.nickname = nickname;
-    return this;
-  }
-
 
   @Override
   public String toString() {

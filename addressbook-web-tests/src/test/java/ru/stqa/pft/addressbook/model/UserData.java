@@ -1,10 +1,17 @@
 package ru.stqa.pft.addressbook.model;
 
 public class UserData {
-  private String companyname;
-  private String address;
-  private String homepageurl;
+  private final String companyname;
+  private final String address;
+  private final String homepageurl;
   private String group;
+
+  public UserData(String companyname, String address, String homepageurl, String group) {
+    this.companyname = companyname;
+    this.address = address;
+    this.homepageurl = homepageurl;
+    this.group = group;
+  }
 
   public String getCompanyname() {
     return companyname;
@@ -21,25 +28,4 @@ public class UserData {
   public String getGroup() {
     return group;
   }
-
-  public UserData withCompanyname(String companyname) {
-    this.companyname = companyname;
-    return this;
-  }
-
-  public UserData withAddress(String address) {
-    this.address = address;
-    return this;
-  }
-
-  public UserData withHomepageurl(String homepageurl) {
-    this.homepageurl = homepageurl;
-    return this;
-  }
-
-  public UserData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
 }

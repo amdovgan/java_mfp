@@ -116,7 +116,8 @@ public class ContactHelper extends HelperBase {
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      usernames.add(new UserName().withId(id).withFirstname(firstname).withLastname(lastname));
+      UserName username = new UserName(id, firstname, null, lastname, null);
+      usernames.add(username);
     }
     return usernames;
   }
