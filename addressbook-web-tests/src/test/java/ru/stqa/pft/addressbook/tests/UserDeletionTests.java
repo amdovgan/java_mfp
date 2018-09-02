@@ -8,14 +8,14 @@ import ru.stqa.pft.addressbook.model.UserDateBirth;
 import ru.stqa.pft.addressbook.model.UserName;
 import ru.stqa.pft.addressbook.model.UserPhoneEmail;
 
-import java.util.Set;
+import java.util.List;
 
 public class UserDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.contact().list().size() == 0) {
       app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate"),
               new UserPhoneEmail().withHomephone("495999999").withMobilephone("9999999999").withEmail("testerCreate@test.ru"),
               new UserDateBirth("1917", "2017"),
@@ -25,13 +25,13 @@ public class UserDeletionTests extends TestBase {
 
   @Test //(enabled = false)
   public void testUserDeletion() {
-    Set<UserName> before = app.contact().all();
-    UserName deletedUser = before.iterator().next();
-    app.contact().delete(deletedUser);
-    Set<UserName> after = app.contact().all();
+    List<UserName> before = app.contact().list();
+    int index = before.size() - 1;
+    app.contact().delete(index);
+    List<UserName> after = app.contact().list();
     Assert.assertEquals(after.size(),before.size() - 1);
 
-    before.remove(deletedUser);
+    before.remove(index);
     Assert.assertEquals(after, before);
 
   }

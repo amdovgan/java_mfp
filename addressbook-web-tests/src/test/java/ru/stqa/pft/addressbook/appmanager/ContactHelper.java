@@ -10,9 +10,8 @@ import ru.stqa.pft.addressbook.model.UserDateBirth;
 import ru.stqa.pft.addressbook.model.UserName;
 import ru.stqa.pft.addressbook.model.UserPhoneEmail;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -41,7 +40,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("ayear"), userDateBirth.getYearofholiday());
 
   }
-
   public void fillUserData (UserData userData, boolean creation) {
     type(By.name("company"), userData.getCompanyname());
     type(By.name("address"), userData.getAddress());
@@ -53,23 +51,20 @@ public class ContactHelper extends HelperBase {
     }
   }
 
+
   public void deleteSelectedUsers() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     wd.switchTo().alert().accept();
   }
 
-  public void selectUserById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id+ "']")).click();
-    //wd.findElements(By.name("selected[]")).get(index).click();
+  public void selectUser(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void initUserModificationById(int id) {
+  public void initUserModification() {
     //click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id+ "']")).click();
-    //wd.findElement(By.xpath("//a[@href='edit.php?id=" + id+ "']/img")).click();
-    //click(By.xpath("//img[@title='Edit']"));
+    click(By.xpath("//img[@title='Edit']"));
   }
-
 
   public void submitUserModification() {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
@@ -91,18 +86,17 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void modify(UserName nameOfUser, UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser) {
-    selectUserById(nameOfUser.getId());
-    initUserModificationById(nameOfUser.getId());
-    //initUserModification();
+  public void modify(int index, UserName nameOfUser, UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser) {
+    selectUser(index);
+    initUserModification();
     fillUserForm(nameOfUser, phoneEmailOfUser,birthDateOfUser);
     fillUserData(dataOfUser,false);
     submitUserModification();
     returnToHomePage();
   }
 
-  public void delete(UserName user) {
-    selectUserById(user.getId());
+  public void delete(int index) {
+    selectUser(index);
     deleteSelectedUsers();
     returnToHomePage();
   }
@@ -115,8 +109,8 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public Set<UserName> all() {
-    Set<UserName> usernames = new HashSet<UserName>();
+  public List<UserName> list() {
+    List<UserName> usernames = new ArrayList<UserName>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
@@ -126,5 +120,4 @@ public class ContactHelper extends HelperBase {
     }
     return usernames;
   }
-
 }

@@ -39,11 +39,6 @@ public class UserName {
     return this;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, middlename, lastname, nickname);
-  }
-
   public UserName withMiddlename(String middlename) {
     this.middlename = middlename;
     return this;
@@ -76,11 +71,14 @@ public class UserName {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     UserName userName = (UserName) o;
-    return id == userName.id &&
-            Objects.equals(firstname, userName.firstname) &&
+    return Objects.equals(firstname, userName.firstname) &&
             Objects.equals(middlename, userName.middlename) &&
-            Objects.equals(lastname, userName.lastname) &&
-            Objects.equals(nickname, userName.nickname);
+            Objects.equals(lastname, userName.lastname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstname, middlename, lastname);
   }
 
 }
