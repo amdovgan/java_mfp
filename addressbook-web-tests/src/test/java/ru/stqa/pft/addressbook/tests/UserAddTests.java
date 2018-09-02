@@ -17,8 +17,8 @@ public class UserAddTests extends TestBase {
     UserDateBirth birthDateOfUser = new UserDateBirth ("1917", "2017");
     UserData dataOfUser = new UserData().withCompanyname("myCompanyCreate").withAddress("myAddressCreate").withHomepageurl("testCreate.ru").withGroup("groupCreateName");
     app.contact().create(nameofuser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
+    assertThat(app.contact().count(),equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-    assertThat(after.size(),equalTo(before.size() + 1));
     assertThat(after, equalTo(
             before.withAdded(nameofuser.withId(after.stream().mapToInt((u) -> u.getId()).max().getAsInt()))));
   }

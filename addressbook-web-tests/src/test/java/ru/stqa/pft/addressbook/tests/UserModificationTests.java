@@ -30,8 +30,8 @@ public class UserModificationTests extends TestBase {
     UserDateBirth birthDateOfUser = new UserDateBirth ("2917", "3917");
     UserData dataOfUser = new UserData().withCompanyname("mycompany5").withAddress("myAddressMod").withHomepageurl("test.com");
     app.contact().modify(nameOfUser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
+    assertEquals(app.contact().count(),before.size());
     Contacts after = app.contact().all();
-    assertEquals(after.size(),before.size());
     assertThat(after, equalTo(before.without(modifiedUser).withAdded(nameOfUser)));
     //assertThat(after, equalTo(before.withModified(modifiedUser, nameOfUser)));
   }
