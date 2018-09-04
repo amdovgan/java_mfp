@@ -13,9 +13,10 @@ public class UserAddTests extends TestBase {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     UserName nameofuser = new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate");
-    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("495999999").withMobilephone("9999999999").withEmail("testerCreate@test.ru");
+    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("(495)999-99-99").withMobilephone("+7(999)999 99 99").withWorkPhone("9999999999")
+            .withEmail("testerCreate@test.ru").withEmail2("tester2Create@test.ru").withEmail3("tester3Create@test.ru");
     UserDateBirth birthDateOfUser = new UserDateBirth ("1917", "2017");
-    UserData dataOfUser = new UserData().withCompanyname("myCompanyCreate").withAddress("myAddressCreate").withHomepageurl("testCreate.ru").withGroup("groupCreateName");
+    UserData dataOfUser = new UserData().withCompanyname("myCompanyCreate").withAddress("Moskva\nst. Mira\n33-18").withHomepageurl("testCreate.ru").withGroup("groupCreateName");
     app.contact().create(nameofuser, phoneEmailOfUser, birthDateOfUser, dataOfUser);
     assertThat(app.contact().count(),equalTo(before.size() + 1));
     Contacts after = app.contact().all();

@@ -8,6 +8,15 @@ public class UserName {
   private String middlename;
   private String lastname;
   private String nickname;
+  private String address;
+  private String homephone;
+  private String mobilephone;
+  private String workphone;
+  private String allPhones;
+  private String email;
+  private String email2;
+  private String email3;
+  private String allEmails;
 
   public String getFirstname() {
     return firstname;
@@ -27,6 +36,42 @@ public class UserName {
 
   public int getId() {
     return id;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public String getHomephone() {
+    return homephone;
+  }
+
+  public String getMobilephone() {
+    return mobilephone;
+  }
+
+  public String getWorkPhone() {
+    return workphone;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
   }
 
   public UserName withId(int id) {
@@ -54,6 +99,50 @@ public class UserName {
     return this;
   }
 
+  public UserName withAddress (String address) {
+    this.address = address;
+    return this;
+  }
+
+  public UserName withHomePhone(String homephone) {
+    this.homephone = homephone;
+    return this;
+  }
+
+  public UserName withMobilePhone(String mobilephone) {
+    this.mobilephone = mobilephone;
+    return this;
+  }
+
+  public UserName withWorkPhone(String workphone) {
+    this.workphone = workphone;
+    return this;
+  }
+
+  public UserName withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public UserName withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public UserName withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public UserName withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public UserName withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
 
   @Override
   public String toString() {
