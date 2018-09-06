@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.*;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -12,7 +14,8 @@ public class UserAddTests extends TestBase {
   public void testUserAdd() {
     app.goTo().homePage();
     Contacts before = app.contact().all();
-    UserName nameofuser = new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate");
+    File photo = new File("src/test/resources/big.png");
+    UserName nameofuser = new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate").withPhoto(photo);
     UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("(495)999-99-99").withMobilephone("+7(999)999 99 99").withWorkPhone("9999999999")
             .withEmail("testerCreate@test.ru").withEmail2("tester2Create@test.ru").withEmail3("tester3Create@test.ru");
     UserDateBirth birthDateOfUser = new UserDateBirth ("1917", "2017");
