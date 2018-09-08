@@ -1,9 +1,15 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class UserName {
+
+  @XStreamOmitField
   private int id = Integer.MAX_VALUE;
   private String firstname;
   private String middlename;
@@ -22,11 +28,6 @@ public class UserName {
 
   public File getPhoto() {
     return photo;
-  }
-
-  public UserName withPhoto(File photo) {
-    this.photo = photo;
-    return this;
   }
 
   public String getFirstname() {
@@ -107,6 +108,11 @@ public class UserName {
 
   public UserName withNickname(String nickname) {
     this.nickname = nickname;
+    return this;
+  }
+
+  public UserName withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 

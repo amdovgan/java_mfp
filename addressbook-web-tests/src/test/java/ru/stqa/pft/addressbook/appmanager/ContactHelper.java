@@ -22,12 +22,31 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillUserForm(UserName userName, UserPhoneEmail userPhoneEmail, UserDateBirth userDateBirth) {
+  public void fillUserForm(UserName userName) {
     type(By.name("firstname"), userName.getFirstname());
     type(By.name("middlename"), userName.getMiddlename());
     type(By.name("lastname"), userName.getLastname());
     type(By.name("nickname"), userName.getNickname());
     attach(By.name("photo"), userName.getPhoto());
+    type(By.name("home"), userName.getHomephone());
+    type(By.name("mobile"), userName.getMobilephone());
+    type(By.name("work"), userName.getWorkPhone());
+    type(By.name("address"), userName.getAddress());
+    type(By.name("email"), userName.getEmail());
+    type(By.name("email2"), userName.getEmail2());
+    type(By.name("email3"), userName.getEmail3());
+/*
+    click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
+    click(By.xpath("//div[@id='content']/form/select[1]//option[27]"));
+    click(By.xpath("//div[@id='content']/form/select[2]//option[11]"));
+    type(By.name("byear"), userDateBirth.getYearofbirth());
+    click(By.xpath("//div[@id='content']/form/select[3]//option[3]"));
+    click(By.xpath("//div[@id='content']/form/select[4]//option[2]"));
+    type(By.name("ayear"), userDateBirth.getYearofholiday());
+*/
+  }
+
+  public void fillUserPhoneEmailDateBirth(UserPhoneEmail userPhoneEmail, UserDateBirth userDateBirth) {
     type(By.name("home"), userPhoneEmail.getHomephone());
     type(By.name("mobile"), userPhoneEmail.getMobilephone());
     type(By.name("work"), userPhoneEmail.getWorkPhone());
@@ -41,7 +60,6 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/select[3]//option[3]"));
     click(By.xpath("//div[@id='content']/form/select[4]//option[2]"));
     type(By.name("ayear"), userDateBirth.getYearofholiday());
-
   }
 
   public void fillUserData (UserData userData, boolean creation) {
@@ -77,21 +95,24 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void create(UserName Name, UserPhoneEmail PhoneEmail, UserDateBirth DateBirth, UserData Data) {
+  public void create(UserName Name /*UserPhoneEmail PhoneEmail, UserDateBirth DateBirth, UserData Data*/) {
     gotoUserForm();
-    fillUserForm(Name, PhoneEmail, DateBirth);
-    fillUserData(Data, true);
+    fillUserForm(Name);
+    //fillUserPhoneEmailDateBirth (PhoneEmail, DateBirth);
+    //fillUserForm(Name, PhoneEmail, DateBirth);
+    //fillUserData(Data, true);
     submitUserCreation();
     contactCache = null;
     returnToHomePage();
   }
 
-  public void modify(UserName nameOfUser, UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser) {
+  public void modify(UserName nameOfUser /*UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser*/) {
     selectUserById(nameOfUser.getId());
     initUserModificationById(nameOfUser.getId());
     //initUserModification();
-    fillUserForm(nameOfUser, phoneEmailOfUser,birthDateOfUser);
-    fillUserData(dataOfUser,false);
+    fillUserForm(nameOfUser /*phoneEmailOfUser,birthDateOfUser*/);
+    //fillUserPhoneEmailDateBirth (phoneEmailOfUser,birthDateOfUser);
+    //fillUserData(dataOfUser,false);
     submitUserModification();
     contactCache = null;
     returnToHomePage();

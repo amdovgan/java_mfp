@@ -14,10 +14,10 @@ public class UserDeletionTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
-      app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate"),
-              new UserPhoneEmail().withHomephone("495999999").withMobilephone("9999999999").withEmail("testerCreate@test.ru"),
+      app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate")
+              /*new UserPhoneEmail().withHomephone("495999999").withMobilephone("9999999999").withEmail("testerCreate@test.ru"),
               new UserDateBirth("1917", "2017"),
-              new UserData().withCompanyname("myCompanyCreate").withAddress("myAddressCreate").withHomepageurl("testCreate.ru").withGroup("groupName"));
+              new UserData().withCompanyname("myCompanyCreate").withAddress("myAddressCreate").withHomepageurl("testCreate.ru").withGroup("groupName")*/);
     }
   }
 
