@@ -8,12 +8,10 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -22,9 +20,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
+  private final Properties properties;
+
+  public GroupCreationTests()  {
+    properties = new Properties();
+  }
+
+
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
-    try (BufferedReader reader =new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))) {
+    String datafile = System.getProperty("datafile", "filegroups");
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", datafile))));
+    try (BufferedReader reader =new BufferedReader(new FileReader(new File(properties.getProperty("data.fileGroupXmlUrl"))))) {
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
@@ -40,7 +47,9 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
-    try (BufferedReader reader =new BufferedReader(new FileReader(new File("src/test/resources/groups.json")))) {
+    String datafile = System.getProperty("datafile", "filegroups");
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", datafile))));
+    try (BufferedReader reader =new BufferedReader(new FileReader(new File(properties.getProperty("data.fileGroupJsonUrl"))))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -54,7 +63,7 @@ public class GroupCreationTests extends TestBase {
   }
 
 
-  @Test(dataProvider = "validGroupsFromJson")
+  @Test(dataProvider = "validGroupsFromXml")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupePage();
     Groups before = app.group().all();

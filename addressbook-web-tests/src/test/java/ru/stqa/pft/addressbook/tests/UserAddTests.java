@@ -10,6 +10,7 @@ import ru.stqa.pft.addressbook.model.*;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -17,9 +18,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserAddTests extends TestBase {
 
+  private final Properties properties;
+
+  public UserAddTests() {
+    properties = new Properties();
+  }
+
   @DataProvider
   public Iterator<Object[]> validContactsFromXml() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
+    String datafile = System.getProperty("datafile", "filecontacts");
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", datafile))));
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File(properties.getProperty("data.fileContactXmlUrl"))))) {
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
@@ -35,7 +44,9 @@ public class UserAddTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
+    String datafile = System.getProperty("datafile", "filecontacts");
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", datafile))));
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File(properties.getProperty("data.fileContactJsonUrl"))))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -50,7 +61,7 @@ public class UserAddTests extends TestBase {
   }
 
 
-  @Test (dataProvider = "validContactsFromJson")
+  @Test (dataProvider = "validContactsFromXml")
   public void testUserAdd(UserName nameofuser) {
 /*    File photo = new File("src/test/resources/big.png");
     //UserName nameofuser = new UserName().withFirstname(Firstname).withLastname(Lastname).withPhoto(photo);
