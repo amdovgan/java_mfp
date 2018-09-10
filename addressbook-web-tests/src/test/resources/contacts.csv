@@ -1,3 +1,9 @@
-Firstname 0;Lastname 0;(495)999-99-99 0;+7(999)999 99 99 0;9999999999 0;Moskva st. Mira 33-18 0;testerCreate@test.ru 0
-Firstname 1;Lastname 1;(495)999-99-99 1;+7(999)999 99 99 1;9999999999 1;Moskva st. Mira 33-18 1;testerCreate@test.ru 1
-Firstname 2;Lastname 2;(495)999-99-99 2;+7(999)999 99 99 2;9999999999 2;Moskva st. Mira 33-18 2;testerCreate@test.ru 2
+Firstname;Lastname;(495)999-99-99;+7(999)999 99 99;9999999999;Moskva
+st. Mira
+33-18;testerCreate@test.ru;testerCreate2@test.ru;testerCreate3@test.ru
+Firstname;Lastname;(495)999-99-99;+7(999)999 99 99;9999999999;Moskva
+st. Mira
+33-18;testerCreate@test.ru;testerCreate2@test.ru;testerCreate3@test.ru
+Firstname;Lastname;(495)999-99-99;+7(999)999 99 99;9999999999;Moskva
+st. Mira
+33-18;testerCreate@test.ru;testerCreate2@test.ru;testerCreate3@test.ru

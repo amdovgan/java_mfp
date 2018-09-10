@@ -1,35 +1,35 @@
 [
   {
-    "firstname": "Firstname 0",
-    "lastname": "Lastname 0",
-    "address": "Moskva\nst. Mira\n33-18 0",
-    "homephone": "(495)999-99-99 0",
-    "mobilephone": "+7(999)999 99 99 0",
-    "workphone": "9999999999 0",
-    "email": "testerCreate@test.ru 0",
-    "email2": "testerCreate2@test.ru 0",
-    "email3": "testerCreate3@test.ru 0"
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "address": "Moskva\nst. Mira\n33-18",
+    "homephone": "(495)999-99-99",
+    "mobilephone": "+7(999)999 99 99",
+    "workphone": "9999999999",
+    "email": "testerCreate@test.ru",
+    "email2": "testerCreate2@test.ru",
+    "email3": "testerCreate3@test.ru"
   },
   {
-    "firstname": "Firstname 1",
-    "lastname": "Lastname 1",
-    "address": "Moskva\nst. Mira\n33-18 1",
-    "homephone": "(495)999-99-99 1",
-    "mobilephone": "+7(999)999 99 99 1",
-    "workphone": "9999999999 1",
-    "email": "testerCreate@test.ru 1",
-    "email2": "testerCreate2@test.ru 1",
-    "email3": "testerCreate3@test.ru 1"
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "address": "Moskva\nst. Mira\n33-18",
+    "homephone": "(495)999-99-99",
+    "mobilephone": "+7(999)999 99 99",
+    "workphone": "9999999999",
+    "email": "testerCreate@test.ru",
+    "email2": "testerCreate2@test.ru",
+    "email3": "testerCreate3@test.ru"
   },
   {
-    "firstname": "Firstname 2",
-    "lastname": "Lastname 2",
-    "address": "Moskva\nst. Mira\n33-18 2",
-    "homephone": "(495)999-99-99 2",
-    "mobilephone": "+7(999)999 99 99 2",
-    "workphone": "9999999999 2",
-    "email": "testerCreate@test.ru 2",
-    "email2": "testerCreate2@test.ru 2",
-    "email3": "testerCreate3@test.ru 2"
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "address": "Moskva\nst. Mira\n33-18",
+    "homephone": "(495)999-99-99",
+    "mobilephone": "+7(999)999 99 99",
+    "workphone": "9999999999",
+    "email": "testerCreate@test.ru",
+    "email2": "testerCreate2@test.ru",
+    "email3": "testerCreate3@test.ru"
   }
 ]

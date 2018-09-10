@@ -61,7 +61,7 @@ public class UserAddTests extends TestBase {
   }
 
 
-  @Test (dataProvider = "validContactsFromXml")
+  @Test (dataProvider = "validContactsFromJson")
   public void testUserAdd(UserName nameofuser) {
 /*    File photo = new File("src/test/resources/big.png");
     //UserName nameofuser = new UserName().withFirstname(Firstname).withLastname(Lastname).withPhoto(photo);

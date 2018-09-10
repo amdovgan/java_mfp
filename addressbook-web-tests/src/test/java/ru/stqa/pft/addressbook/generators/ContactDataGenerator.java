@@ -82,12 +82,12 @@ public class ContactDataGenerator {
   private List<UserName> generateContacts(int count) {
     List<UserName> contacts = new ArrayList<UserName>();
     for (int i = 0; i < count; i++) {
-      contacts.add(new UserName().withFirstname(String.format("Firstname %s", i)).withLastname(String.format("Lastname %s", i))
+      contacts.add(new UserName().withFirstname(String.format("Firstname", i)).withLastname(String.format("Lastname", i))
               /*.withPhoto(File.path("", i))*/
-              .withHomePhone(String.format("(495)999-99-99 %s", i)).withMobilePhone(String.format("+7(999)999 99 99 %s", i))
-              .withWorkPhone(String.format("9999999999 %s", i)).withAddress(String.format("Moskva\nst. Mira\n33-18 %s", i))
-              .withEmail(String.format("testerCreate@test.ru %s", i)).withEmail2(String.format("testerCreate2@test.ru %s", i))
-              .withEmail3(String.format("testerCreate3@test.ru %s", i)));
+              .withHomePhone(String.format("(495)999-99-99", i)).withMobilePhone(String.format("+7(999)999 99 99", i))
+              .withWorkPhone(String.format("9999999999", i)).withAddress(String.format("Moskva\nst. Mira\n33-18", i))
+              .withEmail(String.format("testerCreate@test.ru", i)).withEmail2(String.format("testerCreate2@test.ru", i))
+              .withEmail3(String.format("testerCreate3@test.ru", i)));
     }
     return contacts;
   }
