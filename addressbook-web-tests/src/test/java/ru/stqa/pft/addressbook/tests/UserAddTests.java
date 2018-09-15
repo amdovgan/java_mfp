@@ -61,7 +61,7 @@ public class UserAddTests extends TestBase {
   }
 
 
-  @Test (dataProvider = "validContactsFromJson")
+  @Test (dataProvider = "validContactsFromXml")
   public void testUserAdd(UserName nameofuser) {
 /*    File photo = new File("src/test/resources/big.png");
     //UserName nameofuser = new UserName().withFirstname(Firstname).withLastname(Lastname).withPhoto(photo);
@@ -72,10 +72,10 @@ public class UserAddTests extends TestBase {
     UserData dataOfUser = new UserData().withCompanyname("myCompanyCreate").withAddress("Moskva\nst. Mira\n33-18").withHomepageurl("testCreate.ru").withGroup("groupCreateName");
 */
     app.goTo().homePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create(nameofuser); /*phoneEmailOfUser, birthDateOfUser, dataOfUser*/
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(nameofuser.withId(after.stream().mapToInt((u) -> u.getId()).max().getAsInt()))));
   }

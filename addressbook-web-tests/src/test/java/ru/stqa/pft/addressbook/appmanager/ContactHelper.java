@@ -27,7 +27,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("middlename"), userName.getMiddlename());
     type(By.name("lastname"), userName.getLastname());
     type(By.name("nickname"), userName.getNickname());
-    attach(By.name("photo"), userName.getPhoto());
+    //attach(By.name("photo"), userName.getPhoto());
     type(By.name("home"), userName.getHomephone());
     type(By.name("mobile"), userName.getMobilephone());
     type(By.name("work"), userName.getWorkPhone());
@@ -106,11 +106,11 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void modify(UserName nameOfUser /*UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser*/) {
+  public void modify(UserName nameOfUser) { /*UserPhoneEmail phoneEmailOfUser, UserDateBirth birthDateOfUser, UserData dataOfUser*/
     selectUserById(nameOfUser.getId());
     initUserModificationById(nameOfUser.getId());
     //initUserModification();
-    fillUserForm(nameOfUser /*phoneEmailOfUser,birthDateOfUser*/);
+    fillUserForm(nameOfUser); /*phoneEmailOfUser,birthDateOfUser*/
     //fillUserPhoneEmailDateBirth (phoneEmailOfUser,birthDateOfUser);
     //fillUserData(dataOfUser,false);
     submitUserModification();

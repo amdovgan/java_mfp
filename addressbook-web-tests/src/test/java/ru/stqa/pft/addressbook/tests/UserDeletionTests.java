@@ -12,22 +12,22 @@ public class UserDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
-      app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate")
-              /*new UserPhoneEmail().withHomephone("495999999").withMobilephone("9999999999").withEmail("testerCreate@test.ru"),
-              new UserDateBirth("1917", "2017"),
-              new UserData().withCompanyname("myCompanyCreate").withAddress("myAddressCreate").withHomepageurl("testCreate.ru").withGroup("groupName")*/);
+    if (app.db().contacts().size() == 0) {
+      app.goTo().homePage();
+      app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate").withMiddlename("nameMiddleCreate")
+              .withNickname("nameNickCreate").withAddress("Moskva\nst. Mira\n33-18").withHomePhone("(495)999-99-99").withMobilePhone("+7(999)999 99 99")
+              .withWorkPhone("9999999999").withEmail("testerCreate@test.ru").withEmail2("tester2Create@test.ru").withEmail3("tester3Create@test.ru"));
     }
   }
 
   @Test //(enabled = false)
   public void testUserDeletion() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     UserName deletedUser = before.iterator().next();
+    app.goTo().homePage();
     app.contact().delete(deletedUser);
     assertEquals(app.contact().count(),before.size() - 1);
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedUser)));
 
   }

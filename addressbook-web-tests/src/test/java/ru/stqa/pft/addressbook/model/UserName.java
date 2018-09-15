@@ -3,46 +3,100 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class UserName {
 
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String firstname;
+
   @Expose
+  @Column(name = "middlename")
   private String middlename;
+
   @Expose
+  @Column(name = "lastname")
   private String lastname;
+
   @Expose
+  @Column(name = "nickname")
   private String nickname;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String homephone;
+
   @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilephone;
+
   @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String workphone;
+
   @Expose
+  @Transient
   private String allPhones;
+
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
   @Expose
+  @Transient
   private String allEmails;
+
   @Expose
-  private File photo;
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
+
+  @Transient
+  private String group;
+
+  public String getGroup() {
+    return group;
+  }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
+  }
+
+  public UserName withPhoto(File photo) {
+    this.photo = photo.getPath();
+    return this;
   }
 
   public String getFirstname() {
@@ -126,11 +180,6 @@ public class UserName {
     return this;
   }
 
-  public UserName withPhoto(File photo) {
-    this.photo = photo;
-    return this;
-  }
-
   public UserName withAddress (String address) {
     this.address = address;
     return this;
@@ -176,14 +225,26 @@ public class UserName {
     return this;
   }
 
+  public UserName withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
   @Override
   public String toString() {
     return "UserName{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", middlename='" + middlename + '\'' +
             ", lastname='" + lastname + '\'' +
             ", nickname='" + nickname + '\'' +
+            ", address='" + address + '\'' +
+            ", homephone='" + homephone + '\'' +
+            ", mobilephone='" + mobilephone + '\'' +
+            ", workphone='" + workphone + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
             '}';
   }
 
@@ -196,12 +257,18 @@ public class UserName {
             Objects.equals(firstname, userName.firstname) &&
             Objects.equals(middlename, userName.middlename) &&
             Objects.equals(lastname, userName.lastname) &&
-            Objects.equals(nickname, userName.nickname);
+            Objects.equals(nickname, userName.nickname) &&
+            Objects.equals(address, userName.address) &&
+            Objects.equals(homephone, userName.homephone) &&
+            Objects.equals(mobilephone, userName.mobilephone) &&
+            Objects.equals(workphone, userName.workphone) &&
+            Objects.equals(email, userName.email) &&
+            Objects.equals(email2, userName.email2) &&
+            Objects.equals(email3, userName.email3);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, middlename, lastname, nickname);
+    return Objects.hash(id, firstname, middlename, lastname, nickname, address, homephone, mobilephone, workphone, email, email2, email3);
   }
-
 }
