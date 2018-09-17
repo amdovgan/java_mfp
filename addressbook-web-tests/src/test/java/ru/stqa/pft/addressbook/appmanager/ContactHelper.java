@@ -30,7 +30,7 @@ public class ContactHelper extends HelperBase {
     //attach(By.name("photo"), userName.getPhoto());
     type(By.name("home"), userName.getHomephone());
     type(By.name("mobile"), userName.getMobilephone());
-    type(By.name("work"), userName.getWorkPhone());
+    type(By.name("work"), userName.getWorkphone());
     type(By.name("address"), userName.getAddress());
     type(By.name("email"), userName.getEmail());
     type(By.name("email2"), userName.getEmail2());

@@ -1,8 +1,10 @@
 [
   {
     "firstname": "Firstname",
+    "middlename": "nameMiddleCreate",
     "lastname": "Lastname",
-    "address": "Moskva\nst. Mira\n33-18",
+    "nickname": "nameNickCreate",
+    "address": "Moskva st. Mira 33-18",
     "homephone": "(495)999-99-99",
     "mobilephone": "+7(999)999 99 99",
     "workphone": "9999999999",
@@ -12,8 +14,10 @@
   },
   {
     "firstname": "Firstname",
+    "middlename": "nameMiddleCreate",
     "lastname": "Lastname",
-    "address": "Moskva\nst. Mira\n33-18",
+    "nickname": "nameNickCreate",
+    "address": "Moskva st. Mira 33-18",
     "homephone": "(495)999-99-99",
     "mobilephone": "+7(999)999 99 99",
     "workphone": "9999999999",
@@ -23,8 +27,10 @@
   },
   {
     "firstname": "Firstname",
+    "middlename": "nameMiddleCreate",
     "lastname": "Lastname",
-    "address": "Moskva\nst. Mira\n33-18",
+    "nickname": "nameNickCreate",
+    "address": "Moskva st. Mira 33-18",
     "homephone": "(495)999-99-99",
     "mobilephone": "+7(999)999 99 99",
     "workphone": "9999999999",

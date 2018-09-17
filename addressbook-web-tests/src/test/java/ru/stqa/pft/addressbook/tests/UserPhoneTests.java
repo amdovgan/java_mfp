@@ -23,7 +23,7 @@ public class UserPhoneTests extends TestBase {
   }
 
   private String mergePhones(UserName contact) {
-    return Arrays.asList(contact.getHomephone(), contact.getMobilephone(), contact.getWorkPhone())
+    return Arrays.asList(contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone())
             .stream().filter((s) -> !s.equals(""))
             .map(UserPhoneTests::cleaned)
             .collect(Collectors.joining("\n"));

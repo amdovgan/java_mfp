@@ -1,10 +1,10 @@
 <list>
   <contact>
     <firstname>Firstname</firstname>
+    <middlename>nameMiddleCreate</middlename>
     <lastname>Lastname</lastname>
-    <address>Moskva
-st. Mira
-33-18</address>
+    <nickname>nameNickCreate</nickname>
+    <address>Moskva st. Mira 33-18</address>
     <homephone>(495)999-99-99</homephone>
     <mobilephone>+7(999)999 99 99</mobilephone>
     <workphone>9999999999</workphone>
@@ -14,10 +14,10 @@ st. Mira
   </contact>
   <contact>
     <firstname>Firstname</firstname>
+    <middlename>nameMiddleCreate</middlename>
     <lastname>Lastname</lastname>
-    <address>Moskva
-st. Mira
-33-18</address>
+    <nickname>nameNickCreate</nickname>
+    <address>Moskva st. Mira 33-18</address>
     <homephone>(495)999-99-99</homephone>
     <mobilephone>+7(999)999 99 99</mobilephone>
     <workphone>9999999999</workphone>
@@ -27,10 +27,10 @@ st. Mira
   </contact>
   <contact>
     <firstname>Firstname</firstname>
+    <middlename>nameMiddleCreate</middlename>
     <lastname>Lastname</lastname>
-    <address>Moskva
-st. Mira
-33-18</address>
+    <nickname>nameNickCreate</nickname>
+    <address>Moskva st. Mira 33-18</address>
     <homephone>(495)999-99-99</homephone>
     <mobilephone>+7(999)999 99 99</mobilephone>
     <workphone>9999999999</workphone>

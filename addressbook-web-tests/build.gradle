@@ -29,6 +29,12 @@ task testGroups(type: Test) {
     if (project.hasProperty('datafile')) {
         systemProperty 'datafile', "${datafile}"
     }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('validateUI')) {
+        systemProperty 'validateUI', "${validateUI}"
+    }
 }
 
 task testContacts(type: Test) {
@@ -43,5 +49,11 @@ task testContacts(type: Test) {
     }
     if (project.hasProperty('datafile')) {
         systemProperty 'datafile', "${datafile}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('validateUI')) {
+        systemProperty 'validateUI', "${validateUI}"
     }
 }

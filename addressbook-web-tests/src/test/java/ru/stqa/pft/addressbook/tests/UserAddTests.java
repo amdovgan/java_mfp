@@ -78,6 +78,7 @@ public class UserAddTests extends TestBase {
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(nameofuser.withId(after.stream().mapToInt((u) -> u.getId()).max().getAsInt()))));
+    validateContactListInUI();
   }
 
 }

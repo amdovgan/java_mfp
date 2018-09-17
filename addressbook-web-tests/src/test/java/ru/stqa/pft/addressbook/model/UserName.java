@@ -3,11 +3,14 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -83,11 +86,17 @@ public class UserName {
   @Type(type = "text")
   private String photo;
 
-  @Transient
-  private String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
-  public String getGroup() {
-    return group;
+  public String getWorkphone() {
+    return workphone;
+  }
+
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public File getPhoto() {
@@ -129,10 +138,6 @@ public class UserName {
 
   public String getMobilephone() {
     return mobilephone;
-  }
-
-  public String getWorkPhone() {
-    return workphone;
   }
 
   public String getAllPhones() {
@@ -222,11 +227,6 @@ public class UserName {
 
   public UserName withAllEmails(String allEmails) {
     this.allEmails = allEmails;
-    return this;
-  }
-
-  public UserName withGroup(String group) {
-    this.group = group;
     return this;
   }
 
