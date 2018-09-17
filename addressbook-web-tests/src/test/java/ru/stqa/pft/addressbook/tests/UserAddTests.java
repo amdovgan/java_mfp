@@ -71,6 +71,7 @@ public class UserAddTests extends TestBase {
     UserDateBirth birthDateOfUser = new UserDateBirth("1917", "2017");
     UserData dataOfUser = new UserData().withCompanyname("myCompanyCreate").withAddress("Moskva\nst. Mira\n33-18").withHomepageurl("testCreate.ru").withGroup("groupCreateName");
 */
+    Groups groups = app.db().groups();
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.contact().create(nameofuser); /*phoneEmailOfUser, birthDateOfUser, dataOfUser*/

@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -100,7 +99,11 @@ public class UserName {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo != null) {
+      return new File(photo);
+    } else {
+      return null;
+    }
   }
 
   public UserName withPhoto(File photo) {
@@ -229,6 +232,7 @@ public class UserName {
     this.allEmails = allEmails;
     return this;
   }
+
 
   @Override
   public String toString() {

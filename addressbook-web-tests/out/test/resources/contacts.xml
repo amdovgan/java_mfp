@@ -11,6 +11,7 @@
     <email>testerCreate@test.ru</email>
     <email2>testerCreate2@test.ru</email2>
     <email3>testerCreate3@test.ru</email3>
+    <groups/>
   </contact>
   <contact>
     <firstname>Firstname</firstname>
@@ -24,6 +25,7 @@
     <email>testerCreate@test.ru</email>
     <email2>testerCreate2@test.ru</email2>
     <email3>testerCreate3@test.ru</email3>
+    <groups/>
   </contact>
   <contact>
     <firstname>Firstname</firstname>
@@ -37,5 +39,6 @@
     <email>testerCreate@test.ru</email>
     <email2>testerCreate2@test.ru</email2>
     <email3>testerCreate3@test.ru</email3>
+    <groups/>
   </contact>
 </list>

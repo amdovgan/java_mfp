@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.*;
 
+import java.io.File;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -22,12 +23,12 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillUserForm(UserName userName) {
+  public void fillUserForm(UserName userName, boolean creation) {
     type(By.name("firstname"), userName.getFirstname());
     type(By.name("middlename"), userName.getMiddlename());
     type(By.name("lastname"), userName.getLastname());
     type(By.name("nickname"), userName.getNickname());
-    //attach(By.name("photo"), userName.getPhoto());
+    attach(By.name("photo"), userName.getPhoto());
     type(By.name("home"), userName.getHomephone());
     type(By.name("mobile"), userName.getMobilephone());
     type(By.name("work"), userName.getWorkphone());
@@ -35,6 +36,14 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"), userName.getEmail());
     type(By.name("email2"), userName.getEmail2());
     type(By.name("email3"), userName.getEmail3());
+    if (creation) {
+      if (userName.getGroups().size() > 0) {
+        Assert.assertTrue(userName.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(userName.getGroups().iterator().next().getName());
+      }
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
 /*
     click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
     click(By.xpath("//div[@id='content']/form/select[1]//option[27]"));
@@ -96,8 +105,11 @@ public class ContactHelper extends HelperBase {
   }
 
   public void create(UserName Name /*UserPhoneEmail PhoneEmail, UserDateBirth DateBirth, UserData Data*/) {
+    /*File photo = new File("src/test/resources/big.png");
+    UserName Name = new UserName().withFirstname(Firstname).withLastname(Lastname).withPhoto(photo);*/
+
     gotoUserForm();
-    fillUserForm(Name);
+    fillUserForm(Name, true);
     //fillUserPhoneEmailDateBirth (PhoneEmail, DateBirth);
     //fillUserForm(Name, PhoneEmail, DateBirth);
     //fillUserData(Data, true);
@@ -110,7 +122,7 @@ public class ContactHelper extends HelperBase {
     selectUserById(nameOfUser.getId());
     initUserModificationById(nameOfUser.getId());
     //initUserModification();
-    fillUserForm(nameOfUser); /*phoneEmailOfUser,birthDateOfUser*/
+    fillUserForm(nameOfUser, true); /*phoneEmailOfUser,birthDateOfUser*/
     //fillUserPhoneEmailDateBirth (phoneEmailOfUser,birthDateOfUser);
     //fillUserData(dataOfUser,false);
     submitUserModification();
@@ -188,4 +200,13 @@ public class ContactHelper extends HelperBase {
     //click(By.xpath("//img[@title='Edit']"));
   }
 
+  public void addGroupToContact(UserName nameOfUser) {
+    selectUserById(nameOfUser.getId());
+    submitAddGroup();
+    returnToHomePage();
+  }
+
+  private void submitAddGroup() {
+    click(By.cssSelector("input[value = 'Add to']"));
+  }
 }
