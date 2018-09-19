@@ -19,7 +19,10 @@ public class ContactAddInGroupTest extends TestBase {
   public void ensurePreconditions() {
     if (app.db().contacts().size() == 0) {
       app.goTo().homePage();
-      app.contact().create(new UserName().withFirstname("nameFirstCreate").withLastname("nameLastCreate"));
+      app.contact().create(new UserName().withFirstname("nameFirstMod").withLastname("nameLastMod")
+              .withMiddlename("nameMiddleMod").withNickname("nameNickMod").withAddress("Plast l. Lazo 4")
+              .withHomePhone("(495)888-88-88").withMobilePhone("+7(888)888 88 88").withWorkPhone("9999999999")
+              .withEmail("testerCreate@test.ru").withEmail2("tester2Create@test.ru").withEmail3("tester3Create@test.ru"));
     }
     if (app.db().groups().size() == 0) {
       app.goTo().groupePage();
@@ -30,22 +33,17 @@ public class ContactAddInGroupTest extends TestBase {
   public void testContactAddInGroup() {
     Contacts before = app.db().contacts();
     UserName modifiedUser = before.iterator().next();
-    UserName nameOfUser = new UserName().withId(modifiedUser.getId()).withFirstname("nameFirstMod");
-/*            .withLastname("nameLastMod")
-            .withMiddlename("nameMiddleMod").withNickname("nameNickMod").withAddress("").withHomePhone("").withMobilePhone("").withWorkPhone("")
-            .withEmail("").withEmail2("").withEmail3("");
-*/
 /*
-    UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("(495)888-88-88").withMobilephone("+7(888)888 88 88").withWorkPhone("")
-            .withEmail("testerMod@test.ru").withEmail2("").withEmail3("tester3Mod@test.ru");
-    UserDateBirth birthDateOfUser = new UserDateBirth ("2917", "3917");
-    UserData dataOfUser = new UserData().withCompanyname("mycompany5").withAddress("Plast\nl. Lazo\n4").withHomepageurl("test.com");
+    UserName nameOfUser = new UserName().withId(modifiedUser.getId()).withFirstname("nameFirstMod").withLastname("nameLastMod")
+            .withMiddlename("nameMiddleMod").withNickname("nameNickMod").withAddress("Plast l. Lazo 4")
+            .withHomePhone("(495)888-88-88").withMobilePhone("+7(888)888 88 88").withWorkPhone("9999999999")
+            .withEmail("testerCreate@test.ru").withEmail2("tester2Create@test.ru").withEmail3("tester3Create@test.ru");
 */
     app.goTo().homePage();
-    app.contact().addGroupToContact(nameOfUser);/*, phoneEmailOfUser, birthDateOfUser, dataOfUser*/
+    app.contact().addGroupToContact(modifiedUser);
     assertEquals(app.contact().count(),before.size());
     Contacts after = app.db().contacts();
-    //assertThat(after, equalTo(before.without(modifiedUser).withAdded(nameOfUser)));
-    validateContactListInUI();
+    assertThat(after, equalTo(before.without(modifiedUser).withAdded(modifiedUser)));
+    //validateContactListInUI();
   }
 }

@@ -200,9 +200,16 @@ public class ContactHelper extends HelperBase {
     //click(By.xpath("//img[@title='Edit']"));
   }
 
-  public void addGroupToContact(UserName nameOfUser) {
-    selectUserById(nameOfUser.getId());
-    submitAddGroup();
+  public void addGroupToContact(UserName modifiedUser) {
+    selectUserById(modifiedUser.getId());
+    if (modifiedUser.getGroups().size() > 0) {
+      Assert.assertTrue(modifiedUser.getGroups().size() == 1);
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(modifiedUser.getGroups().iterator().next().getName());
+    } else {
+      submitAddGroup();
+    }
+    //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(modifiedUser.getGroups().iterator().next().getName());
+    //new Select(wd.findElement(By.name("to_group"))).selectByIndex(modifiedUser.getGroups().iterator().next().getId());
     returnToHomePage();
   }
 

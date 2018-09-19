@@ -233,6 +233,10 @@ public class UserName {
     return this;
   }
 
+  public UserName inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 
   @Override
   public String toString() {
@@ -249,6 +253,8 @@ public class UserName {
             ", email='" + email + '\'' +
             ", email2='" + email2 + '\'' +
             ", email3='" + email3 + '\'' +
+            ", photo='" + photo + '\'' +
+            ", groups=" + groups +
             '}';
   }
 
@@ -268,11 +274,14 @@ public class UserName {
             Objects.equals(workphone, userName.workphone) &&
             Objects.equals(email, userName.email) &&
             Objects.equals(email2, userName.email2) &&
-            Objects.equals(email3, userName.email3);
+            Objects.equals(email3, userName.email3) &&
+            Objects.equals(photo, userName.photo) &&
+            Objects.equals(groups, userName.groups);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, middlename, lastname, nickname, address, homephone, mobilephone, workphone, email, email2, email3);
+    return Objects.hash(id, firstname, middlename, lastname, nickname, address, homephone, mobilephone, workphone, email, email2, email3, photo, groups);
   }
+
 }
