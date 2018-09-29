@@ -57,6 +57,7 @@ public class JamesHelper {
     int port = Integer.parseInt(app.getProperty("mailserver.port"));
     String login = app.getProperty("mailserver.adminlogin");
     String password = app.getProperty("mailserver.adminpassword");
+    String command = "help";
 
     try {
       telnet.connect(mailserver, port);
@@ -82,6 +83,7 @@ public class JamesHelper {
 
     //Read welcome message
     readUntil("Welcome " + login + ". HELP for a list of commands");
+    //write(command);Welcome root. HELP for a list of commands
   }
 
   private String readUntil(String pattern) {
