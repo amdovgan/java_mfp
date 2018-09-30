@@ -83,7 +83,6 @@ public class JamesHelper {
 
     //Read welcome message
     readUntil("Welcome " + login + ". HELP for a list of commands");
-    //write(command);Welcome root. HELP for a list of commands
   }
 
   private String readUntil(String pattern) {
@@ -160,12 +159,52 @@ public class JamesHelper {
     Folder inbox = openInbox(username, password);
     List<MailMessage> messages = Arrays.asList(inbox.getMessages()).stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
     closeFolder(inbox);
+    System.out.println(messages);
     return messages;
   }
 
   public static MailMessage toModelMail(Message m) {
     try {
+      System.out.println(m);
       return new MailMessage(m.getAllRecipients()[0].toString(), (String) m.getContent());
+    } catch (MessagingException e) {
+      e.printStackTrace();
+      return  null;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return  null;
+    }
+  }
+
+  public List<MailMessage> waitForMailNext(String username, String password, long timeout) throws MessagingException {
+    long now = System.currentTimeMillis();
+    while (System.currentTimeMillis() < now + timeout) {
+      List<MailMessage> allMail = getAllMailNext(username, password);
+      if (allMail.size() > 1) {
+        return allMail;
+      }
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    throw new Error("No mail :(");
+  }
+
+  public List<MailMessage> getAllMailNext(String username, String password) throws MessagingException {
+    Folder inbox = openInbox(username, password);
+    List<MailMessage> messages = Arrays.asList(inbox.getMessages()).stream().map((p) -> toModelMailTwo(p)).collect(Collectors.toList());
+    closeFolder(inbox);
+    //System.out.println(messages);
+    return messages;
+  }
+
+
+  public static MailMessage toModelMailTwo(Message p) {
+    try {
+      //System.out.println(p);
+      return new MailMessage(p.getAllRecipients()[0].toString(), (String) p.getContent());
     } catch (MessagingException e) {
       e.printStackTrace();
       return  null;

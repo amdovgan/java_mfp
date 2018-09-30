@@ -16,8 +16,9 @@ public class RegistrationHelper extends HelperBase {
     click(By.cssSelector("input[value='Зарегистрироваться']"));
   }
 
-  public void finish(String confirmationLink, String password) {
+  public void finish(String confirmationLink, String password) throws InterruptedException {
     wd.get(confirmationLink);
+    Thread.sleep(700);
     type(By.name("password"), password);
     type(By.name("password_confirm"), password);
     //click(By.cssSelector("input[value='Update User']"));

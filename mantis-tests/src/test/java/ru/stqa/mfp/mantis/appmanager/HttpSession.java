@@ -27,7 +27,7 @@ public class HttpSession {
 
   public boolean login(String username, String password) throws IOException {
     HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
-    List<NameValuePair> params = new ArrayList<NameValuePair>();
+    List<NameValuePair> params = new ArrayList<>();
     params.add(new BasicNameValuePair("username", username));
     params.add(new BasicNameValuePair("password", password));
     params.add(new BasicNameValuePair("secure_session", "on"));
@@ -35,7 +35,9 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpclient.execute(post);
     String body = geTextFrom(response);
-    return  body.contains(String.format("span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
+    //System.out.println(body);
+    //System.out.println(body.contains(String.format("<a href=\"/mantisbt-2.17.1/account_page.php\">%s</a>", username)));
+    return body.contains(String.format("<a href=\"/mantisbt-2.17.1/account_page.php\">%s</a>", username));
   }
 
   private String geTextFrom(CloseableHttpResponse response) throws IOException {
@@ -50,7 +52,9 @@ public class HttpSession {
     HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
     CloseableHttpResponse response = httpclient.execute(get);
     String body = geTextFrom(response);
-    return  body.contains(String.format("span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
+    //System.out.println(body);
+    //System.out.println(String.format("<a href=\"/mantisbt-2.17.1/account_page.php\">%s</a>", username));
+    return  body.contains(String.format("<a href=\"/mantisbt-2.17.1/account_page.php\">%s</a>", username));
   }
 }
 

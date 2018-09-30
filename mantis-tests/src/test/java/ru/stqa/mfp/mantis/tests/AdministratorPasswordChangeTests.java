@@ -1,7 +1,7 @@
 package ru.stqa.mfp.mantis.tests;
 
 import org.testng.annotations.Test;
-import ru.lanwen.verbalregex.VerbalExpression;
+import ru.stqa.mfp.mantis.appmanager.HttpSession;
 import ru.stqa.mfp.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
@@ -12,38 +12,21 @@ import static org.testng.Assert.assertTrue;
 
 public class AdministratorPasswordChangeTests extends TestBase{
 
-  //@Test
-  private String userRegistration() throws IOException, MessagingException {
-    long now = System.currentTimeMillis();
-    String user = String.format("user%s", now);
-    String password = "password";
-    String email = String.format("user%s@localhost", now);
-    app.james().createUser(user, password);
-    app.registration().start(user, email);
-    //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
-    List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
-    String confirmationLink = findConfirmationLink(mailMessages, email);
-    app.registration().finish(confirmationLink, password);
-    //assertTrue(app.newSession().login(user, password));
-    return user;
-  }
-
-  private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-    MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-    return regex.getText(mailMessage.text);
-  }
 
   @Test
   public void testAdministratorPasswordChange() throws IOException, MessagingException, InterruptedException {
-    String username = userRegistration();
-    //String username = "user1538235455093";
-    String user = "administrator";
-    String password = "administrator";
-    app.login().userLogin(user, password);
-    app.login().resetUsePassword(username);
-
-
+    String username = app.login().userRegistration();
+    String userpassword = "password";
+    String email = username + "@localhost";
+    String passwordnew = "passwordnew";
+    app.login().userLogin();
+    app.login().resetUserPassword(username);
+    List<MailMessage> mailMessages = app.james().waitForMailNext(username, userpassword, 60000);
+    String confirmationLink = app.login().nextConfirmationLink(mailMessages, email);
+    app.registration().finish(confirmationLink, passwordnew);
+    HttpSession session = app.newSession();
+    assertTrue(session.login(username, passwordnew));
+    assertTrue(session.isLoggedInAs(username));
   }
 
 }
