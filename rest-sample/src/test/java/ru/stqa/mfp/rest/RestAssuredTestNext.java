@@ -21,7 +21,7 @@ public class RestAssuredTestNext extends TestBase {
     skipIfNotFixed(10);
   }
 
-  @Test (enabled = false)
+  @Test (enabled = false )
   public void testCreateIssue() throws IOException {
     skipIfNotFixed(357);
     Set<Issue> oldIssues = getIssues();
