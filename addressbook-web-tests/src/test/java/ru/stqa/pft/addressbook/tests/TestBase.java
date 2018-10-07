@@ -68,19 +68,14 @@ public class TestBase {
   }
 
   public void validateContactListInUI() {
-    if (Boolean.getBoolean("validateUI")) {
+    if (Boolean.getBoolean("verifyUI")) {
       Contacts dbContacts = app.db().contacts();
       Contacts uiContacts = app.contact().all();
       assertThat(uiContacts, equalTo(dbContacts.stream()
               .map((u) -> new UserName().withId(u.getId()).withFirstname(u.getFirstname()).withLastname(u.getLastname())
-                      .withMiddlename(u.getMiddlename()).withNickname(u.getNickname())
-                      .withAddress(u.getAddress()).withHomePhone(u.getHomephone())
-                      .withMobilePhone(u.getMobilephone()).withWorkPhone(u.getWorkphone()).withEmail(u.getEmail())
-                      .withEmail2(u.getEmail2()).withEmail3(u.getEmail3())).collect(Collectors.toSet())));
+                      .withAddress(u.getAddress()))
+              .collect(Collectors.toSet())));
     }
   }
-
-
-
 }
 

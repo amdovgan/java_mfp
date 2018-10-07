@@ -11,6 +11,8 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.*;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -28,7 +30,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("middlename"), userName.getMiddlename());
     type(By.name("lastname"), userName.getLastname());
     type(By.name("nickname"), userName.getNickname());
-    attach(By.name("photo"), userName.getPhoto());
+    //attach(By.name("photo"), userName.getPhoto());
     type(By.name("home"), userName.getHomephone());
     type(By.name("mobile"), userName.getMobilephone());
     type(By.name("work"), userName.getWorkphone());
@@ -158,7 +160,8 @@ public class ContactHelper extends HelperBase {
       String address = cells.get(3).getText();
       String allEmails = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
-      usenames.add(new UserName().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
+      usenames.add(new UserName().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
     }
     return usenames;
   }
@@ -202,18 +205,72 @@ public class ContactHelper extends HelperBase {
 
   public void addGroupToContact(UserName modifiedUser) {
     selectUserById(modifiedUser.getId());
+    //new Select(wd.findElement(By.name("to_group"))).selectByIndex(modifiedUser.getGroups().withAdded());
+    //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(modifiedUser.getGroups().iterator().next().getId());
+    click(By.cssSelector("input[value = 'Add to']"));
+/*
     if (modifiedUser.getGroups().size() > 0) {
-      Assert.assertTrue(modifiedUser.getGroups().size() == 1);
+      //Assert.assertTrue(modifiedUser.getGroups().size() == 1);
     new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(modifiedUser.getGroups().iterator().next().getName());
     } else {
       submitAddGroup();
     }
     //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(modifiedUser.getGroups().iterator().next().getName());
     //new Select(wd.findElement(By.name("to_group"))).selectByIndex(modifiedUser.getGroups().iterator().next().getId());
+*/
     returnToHomePage();
   }
 
   private void submitAddGroup() {
     click(By.cssSelector("input[value = 'Add to']"));
+  }
+
+  public List<String> getUIGroups() {
+    Select select = new Select(wd.findElement(By.name("to_group")));
+    List<WebElement> list = select.getOptions();
+    List<String> groupsName = new ArrayList<>();
+    for (WebElement element:list){
+      groupsName.add(element.getAttribute("value"));
+    }
+    return groupsName;
+  }
+
+  public GroupData searchEmptyGroup(UserName contactBefore, Groups groupsBefore) {
+    GroupData emptyGroup = null;
+    Iterator<GroupData> iter = groupsBefore.iterator();
+    while (iter.hasNext()) {
+      GroupData grp = iter.next();
+      if (!contactBefore.getGroups().contains(grp)) {
+        emptyGroup = grp;
+        break;
+      }
+    }
+    return emptyGroup;
+  }
+
+  public void addToGroup(UserName contact) {
+    selectUserById(contact.getId());
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+    click(By.cssSelector("input[value = 'Add to']"));
+  }
+
+  public UserName searchModContact(Contacts contactsAfter, UserName contactBefore) {
+    UserName contactAfter = null;
+    Iterator<UserName> iter = contactsAfter.iterator();
+    while (iter.hasNext()){
+      UserName cnt = iter.next();
+      if (cnt.getId() == contactBefore.getId()) {
+        contactAfter = cnt;
+        break;
+      }
+    }
+    return contactAfter;
+  }
+
+  public void removeFromGroup(UserName contact) {
+    Select select = new Select(wd.findElement(By.name("group")));
+    select.selectByVisibleText(contact.getGroups().iterator().next().getName());
+    selectUserById(contact.getId());
+    click(By.name("remove"));
   }
 }

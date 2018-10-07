@@ -65,7 +65,7 @@ public class GroupCreationTests extends TestBase {
   }
 
 
-  @Test(dataProvider = "validGroupsFromXml")
+  @Test(enabled = false/*dataProvider = "validGroupsFromXml"*/)
   public void testGroupCreation(GroupData group) {
     app.goTo().groupePage();
     Groups before = app.db().groups();
@@ -77,7 +77,7 @@ public class GroupCreationTests extends TestBase {
     verifyGroupListInUI();
   }
 
-  @Test (enabled = false)
+  @Test (enabled = true)
   public void testBadGroupCreation() {
     app.goTo().groupePage();
     Groups before = app.db().groups();

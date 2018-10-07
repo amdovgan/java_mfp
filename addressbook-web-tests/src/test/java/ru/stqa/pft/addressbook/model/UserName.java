@@ -87,7 +87,8 @@ public class UserName {
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
-          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
 
   public String getWorkphone() {
@@ -239,26 +240,6 @@ public class UserName {
   }
 
   @Override
-  public String toString() {
-    return "UserName{" +
-            "id=" + id +
-            ", firstname='" + firstname + '\'' +
-            ", middlename='" + middlename + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", nickname='" + nickname + '\'' +
-            ", address='" + address + '\'' +
-            ", homephone='" + homephone + '\'' +
-            ", mobilephone='" + mobilephone + '\'' +
-            ", workphone='" + workphone + '\'' +
-            ", email='" + email + '\'' +
-            ", email2='" + email2 + '\'' +
-            ", email3='" + email3 + '\'' +
-            ", photo='" + photo + '\'' +
-            ", groups=" + groups +
-            '}';
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -275,13 +256,31 @@ public class UserName {
             Objects.equals(email, userName.email) &&
             Objects.equals(email2, userName.email2) &&
             Objects.equals(email3, userName.email3) &&
-            Objects.equals(photo, userName.photo) &&
             Objects.equals(groups, userName.groups);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, middlename, lastname, nickname, address, homephone, mobilephone, workphone, email, email2, email3, photo, groups);
+    return Objects.hash(id, firstname, middlename, lastname, nickname, address, homephone, mobilephone, workphone, email, email2, email3, groups);
+  }
+
+  @Override
+  public String toString() {
+    return "UserName{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", middlename='" + middlename + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", address='" + address + '\'' +
+            ", homephone='" + homephone + '\'' +
+            ", mobilephone='" + mobilephone + '\'' +
+            ", workphone='" + workphone + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", groups=" + groups +
+            '}';
   }
 
 }

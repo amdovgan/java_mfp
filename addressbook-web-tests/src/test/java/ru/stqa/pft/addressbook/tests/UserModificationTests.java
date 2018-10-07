@@ -30,11 +30,11 @@ public class UserModificationTests extends TestBase {
   public void testUserModification() {
     Contacts before = app.db().contacts();
     UserName modifiedUser = before.iterator().next();
-    UserName nameOfUser = new UserName().withId(modifiedUser.getId()).withFirstname("nameFirstMod");
-/*            .withLastname("nameLastMod")
-            .withMiddlename("nameMiddleMod").withNickname("nameNickMod").withAddress("").withHomePhone("").withMobilePhone("").withWorkPhone("")
-            .withEmail("").withEmail2("").withEmail3("");
-*/
+    UserName nameOfUser = new UserName().withId(modifiedUser.getId()).withFirstname("nameFirstMod").withLastname("nameLastMod")
+            .withMiddlename("nameMiddleMod").withNickname("nameNickMod").withAddress("Plast l. Lazo 4")
+            .withHomePhone("(495)888-88-88").withMobilePhone("+7(888)888 88 88").withWorkPhone("9999999999")
+            .withEmail("testerCreate@test.ru").withEmail2("testerCreate2@test.ru").withEmail3("testerCreate3@test.ru");
+
 /*
     UserPhoneEmail phoneEmailOfUser = new UserPhoneEmail().withHomephone("(495)888-88-88").withMobilephone("+7(888)888 88 88").withWorkPhone("")
             .withEmail("testerMod@test.ru").withEmail2("").withEmail3("tester3Mod@test.ru");
