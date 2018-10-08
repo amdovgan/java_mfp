@@ -51,9 +51,7 @@ public class AddContactToGroupTest extends TestBase {
     app.contact().addToGroup(contact);
     Contacts contactsAfter = app.db().contacts();
     UserName contactAfter = app.contact().searchModContact(contactsAfter, contactBefore);
-
-    //assertThat(contactSetAfter, equalTo(contactSetBefore.without(contactBefore).withAdded(contact)));
-    //assertThat(contactAfter.getGroups(), equalTo(contactBefore.getGroups().withAdded(emptyGroup)));
+    assertThat(contactAfter.getGroups(), equalTo(contactBefore.getGroups().withAdded(emptyGroup)));
   }
 
 }
