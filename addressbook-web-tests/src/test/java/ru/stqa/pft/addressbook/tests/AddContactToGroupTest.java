@@ -26,6 +26,7 @@ public class AddContactToGroupTest extends TestBase {
       app.goTo().groupePage();
       app.group().create(new GroupData().withName("groupCreateName"));
     }
+    app.goTo().homePage();
   }
 
   @Test

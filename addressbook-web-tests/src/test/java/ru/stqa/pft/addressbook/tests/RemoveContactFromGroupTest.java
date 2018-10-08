@@ -29,31 +29,7 @@ public class RemoveContactFromGroupTest extends TestBase {
       app.goTo().groupePage();
       app.group().create(new GroupData().withName("groupCreateName"));
     }
-  }
-
-  @Test(enabled = false)
-  public void testContactAddInGroup() {
-    Groups groupsBefore = app.db().groups();
-    int groupSize = groupsBefore.size();
-    Contacts before = app.db().contacts();
-    UserName modifiedUser = before.iterator().next();
-    int contactGroupSize = modifiedUser.getGroups().size();
-
-    if (contactGroupSize < groupSize) {
-      app.goTo().homePage();
-      app.contact().addGroupToContact(modifiedUser);
-    } else {
-      app.goTo().groupePage();
-      app.group().create(new GroupData().withName("test 148"));
-      app.goTo().homePage();
-      Groups groupsAfter = app.db().groups();
-      app.contact().addGroupToContact(modifiedUser);
-    }
-
-    assertEquals(app.contact().count(),before.size());
-    Contacts after = app.db().contacts();
-    assertThat(after, equalTo(before.without(modifiedUser).withAdded(modifiedUser)));
-    //validateContactListInUI();
+    app.goTo().homePage();
   }
 
   @Test
@@ -70,7 +46,6 @@ public class RemoveContactFromGroupTest extends TestBase {
             .inGroup(emptyGroup);
     if (!contactBefore.getGroups().contains(emptyGroup)) {
       app.contact().addToGroup(contact);
-      app.goTo().homePage();
     }
     app.contact().deleteFromGroup(contact);
     Contacts contactsAfter = app.db().contacts();
