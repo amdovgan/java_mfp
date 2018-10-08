@@ -267,7 +267,7 @@ public class ContactHelper extends HelperBase {
     return contactAfter;
   }
 
-  public void removeFromGroup(UserName contact) {
+  public void deleteFromGroup(UserName contact) {
     Select select = new Select(wd.findElement(By.name("group")));
     select.selectByVisibleText(contact.getGroups().iterator().next().getName());
     selectUserById(contact.getId());

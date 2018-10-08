@@ -31,7 +31,7 @@ public class RemoveContactFromGroupTest extends TestBase {
     }
   }
 
-  @Test
+  @Test(enabled = false)
   public void testContactAddInGroup() {
     Groups groupsBefore = app.db().groups();
     int groupSize = groupsBefore.size();
@@ -54,5 +54,27 @@ public class RemoveContactFromGroupTest extends TestBase {
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedUser).withAdded(modifiedUser)));
     //validateContactListInUI();
+  }
+
+  @Test
+  public void testContactDeletedFromGroup() {
+    Contacts contactsBefore = app.db().contacts();
+    UserName contactBefore = contactsBefore.iterator().next();
+
+    Groups groupsBefore = app.db().groups();
+    GroupData emptyGroup = groupsBefore.iterator().next();
+    UserName contact = new UserName().withId(contactBefore.getId()).withFirstname(contactBefore.getFirstname()).withLastname(contactBefore.getLastname())
+            .withMiddlename(contactBefore.getMiddlename()).withNickname(contactBefore.getMiddlename()).withAddress(contactBefore.getAddress())
+            .withHomePhone(contactBefore.getHomephone()).withWorkPhone(contactBefore.getWorkphone()).withMobilePhone(contactBefore.getMobilephone())
+            .withEmail(contactBefore.getEmail()).withEmail2(contactBefore.getEmail2()).withEmail3(contactBefore.getEmail3())
+            .inGroup(emptyGroup);
+    if (!contactBefore.getGroups().contains(emptyGroup)) {
+      app.contact().addToGroup(contact);
+      app.goTo().homePage();
+    }
+    app.contact().deleteFromGroup(contact);
+    Contacts contactsAfter = app.db().contacts();
+    UserName contactAfter = app.contact().searchModContact(contactsAfter, contactBefore);
+    assertThat(contactAfter.getGroups(), equalTo(contactBefore.getGroups().without(emptyGroup)));
   }
 }
