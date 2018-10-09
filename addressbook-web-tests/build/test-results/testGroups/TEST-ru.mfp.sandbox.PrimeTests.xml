@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.mfp.sandbox.PrimeTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-10-06T15:57:06" hostname="Мирославный-ПК" time="6.922">
-  <properties/>
-  <testcase name="testNonPrime" classname="ru.mfp.sandbox.PrimeTests" time="0.0"/>
-  <testcase name="testPrime" classname="ru.mfp.sandbox.PrimeTests" time="6.92"/>
-  <testcase name="testPrimeFast" classname="ru.mfp.sandbox.PrimeTests" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
